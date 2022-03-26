@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <title>Code Quiz</title>
+  </head>
+  <body>
+    <header>
+      <button id="scoreboard" data-states="[0]">View Highscores</button>
+      <p id="timer" data-states="[1]">
+        Time Remaining: <span class="time-remaining">100</span>
+      </p>
+    </header>
+    <main>
+      <section id="screen0" data-states="[0]">
+          <h1>Code Quiz!</h1>
+          <p>Try to answer the questions as quickly as possible. For every wrong answer, 10 seconds will be deducted from the timer. Good luck!</p>
+          <button id="start-quiz">Start Quiz</button>
+      </section>
+
+      <section id="screen1" data-states="[1]">
+          <h2 id="question">text</h2>
+          <ul id="possible-answers"></ul>
+          <hr>
+          <p class="answer-result">text</p>
+      </section>
+
+      <section id="screen2" data-states="[2]">
+          <h1>Pencil Down!</h1>
+          <p>Your Final Score: <span id=final-score>0</span></p>
+          <form>
+            <input type="text" placeholder="enter initials">
+            <button id="submit-hs">Submit</button>
+          </form>
+          <hr>
+          <p class="answer-result">text</p>
+      </section>
+
+      <section id="screen3" data-states="[3]">
+          <h1>High Scores:</h1>
+          <ol id="scoreboard-leader"></ol>
+          <button id="return-to-main">Go Back</button>
+          <button id="clear-highscores">Clear Highscores</button>
+      </section>
+    </main>
+
+    <script src="/assets/js/script.js"></script>
+  </body>
+</html>
