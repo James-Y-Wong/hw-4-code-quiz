@@ -1,0 +1,43 @@
+/* color pallete from schemecolor.com */
+:root {
+    --light: #FEEFEA;
+    --red: #FE6D68;
+    --blue: #36428F;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    background-color: var(--blue);
+    color: var(--light);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+header p {
+    margin: 0px;
+    padding: 0px;
+    flex: 1;
+    text-align: right;
+}
+
+button {
+    padding: 5px;
+    border-radius: 9999px;
+    background-color: var(--red);
+    color: var(--light);
+    border-color: var(--light);
+}
+
+button:active {
+    background-color: var(--blue);
+}
+
+input {
+    padding: 5px;
+}
+
