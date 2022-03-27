@@ -45,3 +45,12 @@ input {
     display: none;
 }
 
+ol li {
+    list-style-type: none;
+}
+
+ol li:hover {
+    color: var(--red);
+    cursor: pointer;
+}
+
