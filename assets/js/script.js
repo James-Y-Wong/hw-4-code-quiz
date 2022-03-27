@@ -3,6 +3,7 @@ var screen0El = document.querySelector("#screen0");
 var screen1El = document.querySelector("#screen1");
 var screen2El = document.querySelector("#screen2");
 var screen3El = document.querySelector("#screen3");
+var screen4El = document.querySelector("#screen4");
 var scoreboardBtn = document.querySelector("#scoreboard");
 var startQuizBtn = document.querySelector("#start-quiz");
 var submitHighscoreBtn = document.querySelector("#submit-hs");
@@ -78,6 +79,7 @@ var dynamicElements = [
     screen1El,
     screen2El,
     screen3El,
+    screen4El,
     scoreboardBtn,
     timer
   ];
