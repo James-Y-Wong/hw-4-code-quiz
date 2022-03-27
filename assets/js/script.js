@@ -73,6 +73,12 @@ var questions = [
 ];
 
 var currentQuestion = 0;
+var currentAnswer;
+var currentTime = 100;
+
+console.log(questions[currentQuestion]);
+console.log(questions[currentQuestion].answers[2]);
+console.log(questions[currentQuestion].answer);
 
 var dynamicElements = [
     screen0El,
@@ -125,6 +131,26 @@ function populateQuestion() {
       currentQuestion++;
     }
 }
+
+function correctAnswer() {
+
+}
+
+function wrongAnswer() {
+    
+}
+
+answerEl.addEventListener("click", function(event) {
+    if (currentTime === 0) {
+        setState(3);
+    }
+    var target = event.target;
+    if (currentTime > 0) {
+        if (target.matches("li")) {
+            answerResult.textContent = "✅ Correct!  ❌ Wrong!";
+        }
+    }
+});
 
 function setEventListeners() {
     scoreboardBtn.addEventListener("click", function () {
