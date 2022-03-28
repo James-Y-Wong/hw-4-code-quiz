@@ -74,7 +74,7 @@ var questions = [
 
 var currentQuestion = 0;
 var currentAnswer;
-var currentTime = 100;
+var currentTime = 10;
 
 console.log(questions[currentQuestion]);
 console.log(questions[currentQuestion].answers);
@@ -125,11 +125,6 @@ function populateQuestion() {
       li.textContent = question;
       answerEl.appendChild(li);
     });
-    // if (currentQuestion === questions.length - 1) {
-    //   currentQuestion = 0;
-    // } else {
-    //   currentQuestion++;
-    // }
 }
 
 function populateNextQuestion() {
@@ -139,26 +134,20 @@ function populateNextQuestion() {
         currentQuestion++;
         populateQuestion();
     }
-
-
 }
 
-function correctAnswer() {
-
-}
-
-function wrongAnswer() {
-
-}
-
-function setHighscore () {
-    
+function startTimer () {
+   var timeInterval = setInterval(function() {
+        timeRemaining.textContent = currentTime;
+        currentTime--;
+        if(currentTime === 0) {
+            setState(0);
+            clearInterval(timeInterval);
+        }
+   }, 1000); 
 }
 
 answerEl.addEventListener("click", function(event) {
-    if (currentTime === 0) {
-        setState(3);
-    }
     var target = event.target;
     var correctAnswer = questions[currentQuestion].answer;
     var userAnswer = target.textContent;
@@ -169,6 +158,7 @@ answerEl.addEventListener("click", function(event) {
         }
             if (correctAnswer != userAnswer) {
                 answerResult.textContent = "❌ Wrong!";
+                populateNextQuestion();
             }
     }
 });
@@ -179,6 +169,7 @@ function setEventListeners() {
     });
     startQuizBtn.addEventListener("click", function () {
       setState(1);
+      startTimer();
     });
     returnBtn.addEventListener("click", function () {
       setState(0);
