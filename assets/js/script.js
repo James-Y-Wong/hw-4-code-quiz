@@ -23,52 +23,52 @@ var questions = [
     {
         question: "_______ is the process of finding errors and fixing them within a program.",
         answers: ["1) Compiling", "2) Executing", "3) Debugging", "4) Scanning"],
-        answer: 2
+        answer: "3) Debugging"
     },
     {
         question: "A loop that never ends is referred to as a(n) _______",
         answers: ["1) While loop", "2) Infinite loop", "3) Recursive loop", "4) For loop"],
-        answer: 1
+        answer: "2) Infinite loop"
     },
     {
         question: "Which of the following is an assignment operator?",
         answers: ["1) =", "2) &&", "3) +", "4) %"],
-        answer: 0
+        answer: "1) ="
     },
     {
         question: "Which type has two literal values?",
         answers: ["1) String", "2) Numeric", "3) Array", "4) Boolean"],
-        answer: 3
+        answer: "4) Boolean"
     },
     {
         question: "What does HTML stand for?",
         answers: ["1) HyperText Markup Language", "2) Hit The Mother Load", "3) Hey That's My Lunch", "4) Hello To My Love"],
-        answer: 0
+        answer: "1) HyperText Markup Language"
     },
     {
         question: "What does CSS stand for?",
         answers: ["1) Combat Service Support", "2) Cascading Style Sheet", "3) Central Support System", "4) Custom Style Sheet"],
-        answer: 1
+        answer: "2) Cascading Style Sheet"
     },
     {
         question: "Which of the following is a comparison operator?",
         answers: ["1) =", "2) +", "3) ===", "4) %"],
-        answer: 2
+        answer: "3) ==="
     },
     {
         question: "Which of the following prints text the console?",
         answers: ["1) window.alert", "2) window.confirm", "3) window.prompt", "4) console.log"],
-        answer: 3
+        answer: "4) console.log"
     },
     {
         question: "What does Math.random() do?",
         answers: ["1) Creates random math problems", "2) Creates a random word problem", "3) It doesn't do anything", "4) Returns a random number between 0 and 1"],
-        answer: 3
+        answer: "4) Returns a random number between 0 and 1"
     },
     {
         question: "What does Math.floor() do?",
         answers: ["1) Returns a random number between 0 and 1", "2) Puts the math on the floor", "3) Returns the largest integer less than or equal to a number", "4) It doesn't do anything"],
-        answer: 2
+        answer: "3) Returns the largest integer less than or equal to a number"
     }
 ];
 
@@ -77,7 +77,7 @@ var currentAnswer;
 var currentTime = 100;
 
 console.log(questions[currentQuestion]);
-console.log(questions[currentQuestion].answers[2]);
+console.log(questions[currentQuestion].answers);
 console.log(questions[currentQuestion].answer);
 
 var dynamicElements = [
@@ -125,11 +125,22 @@ function populateQuestion() {
       li.textContent = question;
       answerEl.appendChild(li);
     });
+    // if (currentQuestion === questions.length - 1) {
+    //   currentQuestion = 0;
+    // } else {
+    //   currentQuestion++;
+    // }
+}
+
+function populateNextQuestion() {
     if (currentQuestion === questions.length - 1) {
-      currentQuestion = 0;
+        setState(2);
     } else {
-      currentQuestion++;
+        currentQuestion++;
+        populateQuestion();
     }
+
+
 }
 
 function correctAnswer() {
@@ -137,6 +148,10 @@ function correctAnswer() {
 }
 
 function wrongAnswer() {
+
+}
+
+function setHighscore () {
     
 }
 
@@ -145,10 +160,16 @@ answerEl.addEventListener("click", function(event) {
         setState(3);
     }
     var target = event.target;
+    var correctAnswer = questions[currentQuestion].answer;
+    var userAnswer = target.textContent;
     if (currentTime > 0) {
-        if (target.matches("li")) {
-            answerResult.textContent = "✅ Correct!  ❌ Wrong!";
+            if (correctAnswer == userAnswer) {
+                answerResult.textContent = "✅ Correct!";
+                populateNextQuestion();
         }
+            if (correctAnswer != userAnswer) {
+                answerResult.textContent = "❌ Wrong!";
+            }
     }
 });
 
