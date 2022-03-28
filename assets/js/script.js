@@ -74,7 +74,8 @@ var questions = [
 
 var currentQuestion = 0;
 var currentAnswer;
-var currentTime = 10;
+var currentTime = 100;
+var myTime;
 
 console.log(questions[currentQuestion]);
 console.log(questions[currentQuestion].answers);
@@ -130,6 +131,7 @@ function populateQuestion() {
 function populateNextQuestion() {
     if (currentQuestion === questions.length - 1) {
         setState(2);
+        finalScore.textContent = currentTime;
     } else {
         currentQuestion++;
         populateQuestion();
@@ -147,6 +149,12 @@ function startTimer () {
    }, 1000); 
 }
 
+function wrongTimer () {
+    currentTime = currentTime - 10;
+    if (currentTime === 0) {
+    }
+}
+
 answerEl.addEventListener("click", function(event) {
     var target = event.target;
     var correctAnswer = questions[currentQuestion].answer;
@@ -158,6 +166,7 @@ answerEl.addEventListener("click", function(event) {
         }
             if (correctAnswer != userAnswer) {
                 answerResult.textContent = "❌ Wrong!";
+                wrongTimer();
                 populateNextQuestion();
             }
     }
