@@ -79,9 +79,6 @@ var currentAnswer;
 var currentTime = 100;
 var submittedInput = [];
 
-console.log(questions[currentQuestion]);
-console.log(questions[currentQuestion].answers);
-console.log(questions[currentQuestion].answer);
 
 var dynamicElements = [
     screen0El,
@@ -97,7 +94,7 @@ function init() {
     setEventListeners();
     // setState(0);
     getHighScore();
-    // renderHighscores();
+    renderHighscores();
 }
 
 function setState(state) {
@@ -168,13 +165,16 @@ function wrongTimer () {
 
 
 function renderHighscores() {
-    var lastScore = JSON.parse(localStorage.getItem("rankings"));
     scoreboardLeader.innerHTML = "";
-    lastScore.forEach(function (player) {
-        var li = document.createElement("li");
-        li.textContent = player;
-        scoreboardLeader.appendChild(li);
-    })
+    var savedHighscore = JSON.parse(localStorage.getItem("rankings"));
+    var highscores = document.getElementById("scoreboard-leader");
+
+    highscores.innerHTML = savedHighscore
+        .map(score => {
+            return `<li>${score.score} - ${score.player}</li>`;
+        })
+        .join("");
+    
 }
 
 function storeHighscore() {
@@ -189,7 +189,7 @@ submitHighscoreBtn.addEventListener("click", function (event) {
     submittedInput.push(submittedInputText);
     submittedInput.sort((a,b) => b.score - a.score);
     storeHighscore();
-    // renderHighscores();
+    renderHighscores();
     setState(3);
 })
 
@@ -203,6 +203,7 @@ function getHighScore() {
 function resetHighscores () {
     localStorage.clear("rankings");
 }
+
 function setEventListeners() {
     scoreboardBtn.addEventListener("click", function () {
       setState(3);
@@ -220,8 +221,6 @@ function setEventListeners() {
     returnBtn.addEventListener("click", function () {
       setState(0);
     });
-
-    clearHighscore.addEventListener("click", resetHighscores);
 
     answerEl.addEventListener("click", function(event) {
         var target = event.target;
@@ -243,3 +242,8 @@ function setEventListeners() {
 init();
 
 
+function resetHighscores () {
+    localStorage.clear();
+}
+
+clearHighscore.addEventListener("click", resetHighscores);
