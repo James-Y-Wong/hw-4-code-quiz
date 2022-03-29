@@ -177,6 +177,7 @@ function setEventListeners() {
       startTimer();
       submitHighscoreBtn.setAttribute("style", "display:center");
       enterInitials.setAttribute("style", "display:center");
+      screen2El.remove(returnBtn);
     });
     returnBtn.addEventListener("click", function () {
       setState(0);
