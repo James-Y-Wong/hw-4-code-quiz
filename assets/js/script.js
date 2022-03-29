@@ -96,6 +96,7 @@ var dynamicElements = [
 function init() {
     setEventListeners();
     // setState(0);
+    getHighScore();
 }
 
 function setState(state) {
@@ -178,6 +179,13 @@ submitHighscoreBtn.addEventListener("click", function (event) {
     storeHighscore();
     setState(3);
 })
+
+function getHighScore() {
+    var storedHighscore = JSON.parse(localStorage.getItem("rankings"));
+    if (storedHighscore !== null) {
+        submittedInput = storedHighscore;
+    }   
+}
 
 function setEventListeners() {
     scoreboardBtn.addEventListener("click", function () {
