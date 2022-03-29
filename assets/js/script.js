@@ -77,7 +77,7 @@ var questions = [
 var currentQuestion = 0;
 var currentAnswer;
 var currentTime = 100;
-
+var submittedInput = [];
 
 console.log(questions[currentQuestion]);
 console.log(questions[currentQuestion].answers);
@@ -164,6 +164,20 @@ function wrongTimer () {
     }
 }
 
+function storeHighscore() {
+    localStorage.setItem("rankings", JSON.stringify(submittedInput));
+}
+
+submitHighscoreBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+    var submittedInputText = {
+        player: enterInitials.value.trim(),
+        score: finalScore.textContent
+    };
+    submittedInput.push(submittedInputText);
+    storeHighscore();
+    setState(3);
+})
 
 function setEventListeners() {
     scoreboardBtn.addEventListener("click", function () {
@@ -177,7 +191,7 @@ function setEventListeners() {
       startTimer();
       submitHighscoreBtn.setAttribute("style", "display:center");
       enterInitials.setAttribute("style", "display:center");
-      screen2El.remove(returnBtn);
+      screen2El.removeChild(returnBtn);
     });
     returnBtn.addEventListener("click", function () {
       setState(0);
