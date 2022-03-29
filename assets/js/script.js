@@ -97,6 +97,7 @@ function init() {
     setEventListeners();
     // setState(0);
     getHighScore();
+    // renderHighscores();
 }
 
 function setState(state) {
@@ -165,18 +166,30 @@ function wrongTimer () {
     }
 }
 
+
+function renderHighscores() {
+    var lastScore = JSON.parse(localStorage.getItem("rankings"));
+    scoreboardLeader.innerHTML = "";
+    lastScore.forEach(function (player) {
+        var li = document.createElement("li");
+        li.textContent = player;
+        scoreboardLeader.appendChild(li);
+    })
+}
+
 function storeHighscore() {
     localStorage.setItem("rankings", JSON.stringify(submittedInput));
 }
 
 submitHighscoreBtn.addEventListener("click", function (event) {
     event.preventDefault();
-    var submittedInputText = {
-        player: enterInitials.value.trim(),
-        score: finalScore.textContent
-    };
+    var player = enterInitials.value.trim()
+    var score = finalScore.textContent.trim()
+    var submittedInputText = {score, player}
     submittedInput.push(submittedInputText);
+    submittedInput.sort((a,b) => b.score - a.score);
     storeHighscore();
+    // renderHighscores();
     setState(3);
 })
 
@@ -187,6 +200,9 @@ function getHighScore() {
     }   
 }
 
+function resetHighscores () {
+    localStorage.clear("rankings");
+}
 function setEventListeners() {
     scoreboardBtn.addEventListener("click", function () {
       setState(3);
@@ -204,6 +220,8 @@ function setEventListeners() {
     returnBtn.addEventListener("click", function () {
       setState(0);
     });
+
+    clearHighscore.addEventListener("click", resetHighscores);
 
     answerEl.addEventListener("click", function(event) {
         var target = event.target;
@@ -223,3 +241,5 @@ function setEventListeners() {
     });
 }
 init();
+
+
