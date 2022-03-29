@@ -92,7 +92,7 @@ var dynamicElements = [
 
 function init() {
     setEventListeners();
-    // setState(0);
+    setState(0);
     getHighScore();
     renderHighscores();
 }
@@ -200,9 +200,6 @@ function getHighScore() {
     }   
 }
 
-function resetHighscores () {
-    localStorage.clear("rankings");
-}
 
 function setEventListeners() {
     scoreboardBtn.addEventListener("click", function () {
@@ -216,6 +213,7 @@ function setEventListeners() {
       startTimer();
       submitHighscoreBtn.setAttribute("style", "display:center");
       enterInitials.setAttribute("style", "display:center");
+      scoreboardLeader.setAttribute("style", "display:center;");
       screen2El.removeChild(returnBtn);
     });
     returnBtn.addEventListener("click", function () {
@@ -239,11 +237,15 @@ function setEventListeners() {
         }
     });
 }
-init();
+
 
 
 function resetHighscores () {
     localStorage.clear();
+    scoreboardLeader.setAttribute("style", "display:none;");
+
 }
 
 clearHighscore.addEventListener("click", resetHighscores);
+
+init();
