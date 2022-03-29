@@ -2,9 +2,15 @@
 
 ## Description
 
-For this project, I created a password generator page. The criterias that it must meet include:
+For this project, I created a Code Quiz page. 
 
-![This is an image of the criteria needed for password generator](/assets/image/criteria-screenshot.png)
+### User Story
+
+![This is an image of the user story for code quiz](/assets/image/user-story-screenshot.png)
+
+### Acceptance Criteria
+
+![This is an image of the acceptance criteria needed for code quiz](/assets/image/acceptance-criteria-screenshot.png)
 
 ## Purpose
 
@@ -24,4 +30,4 @@ The below picture is the final result. There are no changes to the starter code 
 
 ## Link To Deployed Page
 
-- [Password Generator](https://james-y-wong.github.io/hw-4-code-quiz/)
+- [Code Quiz](https://james-y-wong.github.io/hw-4-code-quiz/)
