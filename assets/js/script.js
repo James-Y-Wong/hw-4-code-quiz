@@ -15,6 +15,8 @@ var answerResult = document.querySelector("#answer-result");
 var finalScore = document.querySelector("#final-score");
 var scoreboardLeader = document.querySelector("#scoreboard-leader");
 var timer = document.querySelector("#timer");
+var enterInitials = document.querySelector("#enter-initials");
+var loserReturnBtn = document.querySelector("#loser-return");
 
 
 var hideState = "hide";
@@ -75,7 +77,7 @@ var questions = [
 var currentQuestion = 0;
 var currentAnswer;
 var currentTime = 100;
-var myTime;
+
 
 console.log(questions[currentQuestion]);
 console.log(questions[currentQuestion].answers);
@@ -142,35 +144,26 @@ function startTimer () {
    var timeInterval = setInterval(function() {
         timeRemaining.textContent = currentTime;
         currentTime--;
-        if(currentTime === 0) {
-            setState(0);
+        if (currentTime <= 0) {
             clearInterval(timeInterval);
-        }
+            setState(2);
+            answerResult.textContent = "Game Over!";
+            submitHighscoreBtn.setAttribute("style", "display:none");
+            enterInitials.setAttribute("style", "display:none")
+            screen2El.append(returnBtn);
+        }    
    }, 1000); 
 }
 
 function wrongTimer () {
-    currentTime = currentTime - 10;
-    if (currentTime === 0) {
+    if (currentTime > 0) {
+        currentTime = currentTime - 10;
+    }
+    if (currentTime <= 0) {
+        currentTime = currentTime;
     }
 }
 
-answerEl.addEventListener("click", function(event) {
-    var target = event.target;
-    var correctAnswer = questions[currentQuestion].answer;
-    var userAnswer = target.textContent;
-    if (currentTime > 0) {
-            if (correctAnswer == userAnswer) {
-                answerResult.textContent = "✅ Correct!";
-                populateNextQuestion();
-        }
-            if (correctAnswer != userAnswer) {
-                answerResult.textContent = "❌ Wrong!";
-                wrongTimer();
-                populateNextQuestion();
-            }
-    }
-});
 
 function setEventListeners() {
     scoreboardBtn.addEventListener("click", function () {
@@ -178,11 +171,32 @@ function setEventListeners() {
     });
     startQuizBtn.addEventListener("click", function () {
       setState(1);
+      currentQuestion = 0;
+      populateQuestion();
+      currentTime = 100;
       startTimer();
+      submitHighscoreBtn.setAttribute("style", "display:center");
+      enterInitials.setAttribute("style", "display:center");
     });
     returnBtn.addEventListener("click", function () {
       setState(0);
     });
-}
 
+    answerEl.addEventListener("click", function(event) {
+        var target = event.target;
+        var correctAnswer = questions[currentQuestion].answer;
+        var userAnswer = target.textContent;
+        if (currentTime > 0) {
+                if (correctAnswer == userAnswer) {
+                    answerResult.textContent = "✅ Correct!";
+                    populateNextQuestion();
+            }
+                if (correctAnswer != userAnswer) {
+                    answerResult.textContent = "❌ Wrong!";
+                    wrongTimer();
+                    populateNextQuestion();
+                }
+        }
+    });
+}
 init();
