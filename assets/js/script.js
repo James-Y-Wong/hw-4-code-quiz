@@ -18,9 +18,10 @@ var timer = document.querySelector("#timer");
 var enterInitials = document.querySelector("#enter-initials");
 var loserReturnBtn = document.querySelector("#loser-return");
 
-
+// sets display to hide when called
 var hideState = "hide";
 
+// array of questions to be displayed
 var questions = [
     {
         question: "_______ is the process of finding errors and fixing them within a program.",
@@ -75,11 +76,10 @@ var questions = [
 ];
 
 var currentQuestion = 0;
-var currentAnswer;
 var currentTime = 100;
 var submittedInput = [];
 
-
+// elements that needs to be hidden at certain times
 var dynamicElements = [
     screen0El,
     screen1El,
@@ -90,6 +90,7 @@ var dynamicElements = [
     timer
   ];
 
+// fires necessary functions at page load
 function init() {
     setEventListeners();
     setState(0);
@@ -97,6 +98,7 @@ function init() {
     renderHighscores();
 }
 
+// function allowing us to hide and show states
 function setState(state) {
     switch (state) {
       case 1:
@@ -117,9 +119,9 @@ function setState(state) {
     });
   }
 
+// function to populate the first question from our questions array and append to page with possible answers
 function populateQuestion() {
     var questionObj = questions[currentQuestion];
-    // Remove the current list items
     answerEl.innerHTML = "";
     questionEl.textContent = questionObj.question;
     questionObj.answers.forEach(function (question) {
@@ -129,6 +131,7 @@ function populateQuestion() {
     });
 }
 
+// when it gets to the last question, it moves to state[2]; if not, go to the next question in questions array
 function populateNextQuestion() {
     if (currentQuestion === questions.length - 1) {
         setState(2);
@@ -139,10 +142,12 @@ function populateNextQuestion() {
     }
 }
 
+// starts timer function
 function startTimer () {
    var timeInterval = setInterval(function() {
         timeRemaining.textContent = currentTime;
         currentTime--;
+        // when timer gets to 0, will go to state[2] with no option to enter intials for highscore, replaced with button to go back to state[0]
         if (currentTime <= 0) {
             clearInterval(timeInterval);
             setState(2);
@@ -154,6 +159,7 @@ function startTimer () {
    }, 1000); 
 }
 
+// if questions is answered incorrectly, timer will subtract 10 seconds
 function wrongTimer () {
     if (currentTime > 0) {
         currentTime = currentTime - 10;
@@ -163,7 +169,7 @@ function wrongTimer () {
     }
 }
 
-
+// renders highscores store in local storage to state[3]
 function renderHighscores() {
     scoreboardLeader.innerHTML = "";
     var savedHighscore = JSON.parse(localStorage.getItem("rankings"));
@@ -177,10 +183,12 @@ function renderHighscores() {
     
 }
 
+// function to save high score to local storage
 function storeHighscore() {
     localStorage.setItem("rankings", JSON.stringify(submittedInput));
 }
 
+// submits high score to high scores array and sorts it by highest score
 submitHighscoreBtn.addEventListener("click", function (event) {
     event.preventDefault();
     var player = enterInitials.value.trim()
@@ -193,6 +201,7 @@ submitHighscoreBtn.addEventListener("click", function (event) {
     setState(3);
 })
 
+// function called by init() to get high score from local stoarge
 function getHighScore() {
     var storedHighscore = JSON.parse(localStorage.getItem("rankings"));
     if (storedHighscore !== null) {
@@ -200,11 +209,12 @@ function getHighScore() {
     }   
 }
 
-
+// function called by init() to fire all event listeners
 function setEventListeners() {
     scoreboardBtn.addEventListener("click", function () {
       setState(3);
     });
+    // starts quiz, and also resets quiz when play again
     startQuizBtn.addEventListener("click", function () {
       setState(1);
       currentQuestion = 0;
@@ -220,16 +230,19 @@ function setEventListeners() {
       setState(0);
     });
 
+    // when user selects answers during the quiz
     answerEl.addEventListener("click", function(event) {
         var target = event.target;
         var correctAnswer = questions[currentQuestion].answer;
         var userAnswer = target.textContent;
         if (currentTime > 0) {
+                // goes to next question with correct validation
                 if (correctAnswer == userAnswer) {
                     answerResult.textContent = "✅ Correct!";
                     populateNextQuestion();
             }
                 if (correctAnswer != userAnswer) {
+                    // goes to next question with wrong validation, and -10 seconds from timer
                     answerResult.textContent = "❌ Wrong!";
                     wrongTimer();
                     populateNextQuestion();
@@ -239,7 +252,7 @@ function setEventListeners() {
 }
 
 
-
+// clears local storage and hides previous <li> created
 function resetHighscores () {
     localStorage.clear();
     scoreboardLeader.setAttribute("style", "display:none;");
