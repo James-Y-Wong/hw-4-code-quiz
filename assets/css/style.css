@@ -55,3 +55,9 @@ ol li:hover {
     color: var(--red);
     cursor: pointer;
 }
+
+@media screen and (max-width: 768px) {
+    .flexbox-item {
+        width: 100%;
+    }
+}
