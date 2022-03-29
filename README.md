@@ -22,7 +22,7 @@ The below pictures are the final result.
 
 ### Start Page
 
->This is the start page when the page loads. User is able to view current highscores and/or start the quiz
+>This is the start page when the page loads. The user is able to view current highscores and/or start the quiz
 >
 >![This is a screenshot of the start page of the code quiz](/assets/image/code-quiz-start-page-screenshot.png)
 
@@ -34,15 +34,15 @@ The below pictures are the final result.
 
 ### End Game Page
 
->Once the last question has been answered or the timer has reached 0, the end page will show. This screen will show user final score which is what is left on the timer.
->- If final score is 0, there will be no option to enter initials and post to highscores. Only optin is to go back to start page.
->- If final score is > 0, user will have to input intials and submit highscores.
+>Once the last question has been answered or the timer has reached 0, the end game page will show. This screen will show the user's final score which is what is left on the timer.
+>- If final score is 0, there will be no option to enter initials and post to highscores. Only option is to go back to start page.
+>- If final score is > 0, the user will have to input intials and submit to highscores.
 >
 >![This is a screenshot of the end game page of the code quiz](/assets/image/code-quiz-end-game-page-screenshot.png)
 
 ### Highscores Page
 
->If "View Highscores" button on the start page or when "Submit" button on the end game page is clicked, it will bring user to the highscores page. The high scores are stored in local storage and is sorted in order to render highest score first. There is an option to clear the highscores and return to start page.
+>If "View Highscores" button on the start page or when "Submit" button on the end game page is clicked, it will bring the user to the highscores page. The high scores are stored in local storage and is sorted in order to render highest score first. There is an option to clear the highscores and/or return to start page.
 >
 >![This is a screenshot of the highscores page of the code quiz](/assets/image/code-quiz-highscores-page-screenshot.png)
 
