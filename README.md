@@ -55,3 +55,9 @@ The below pictures are the final result.
 ## Link To Deployed Page
 
 - [Code Quiz](https://james-y-wong.github.io/hw-4-code-quiz/)
+
+## Contact Information
+
+- Email: jamesyeuwong@gmail.com
+- [LinkedIn](https://www.linkedin.com/in/james-wong-90652497)
+- [GitHub](https://github.com/James-Y-Wong)
